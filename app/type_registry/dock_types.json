@@ -2,7 +2,6 @@
   "runtime_id": 1062,
   "types": {
 
-
   "Did": "[u8;32]",
   "Bytes32": "[u8;32]",
   "Bytes33": "[u8;33]",
@@ -182,7 +181,6 @@
   "EpochNo": "u32",
   "EpochLen": "u32",
   "SlotNo": "u64",
-  "Balance": "u64",
   "EpochDetail": {
     "type": "struct",
     "type_mapping": [
@@ -204,15 +202,15 @@
       ],
       [
         "total_emission",
-        "Option<Balance>"
+        "Option<u128>"
       ],
       [
         "emission_for_treasury",
-        "Option<Balance>"
+        "Option<u128>"
       ],
       [
         "emission_for_validators",
-        "Option<Balance>"
+        "Option<u128>"
       ]
     ]
   },
@@ -225,14 +223,41 @@
       ],
       [
         "locked_reward",
-        "Option<Balance>"
+        "Option<u128>"
       ],
       [
         "unlocked_reward",
-        "Option<Balance>"
+        "Option<u128>"
       ]
     ]
   },
+  "Payload": {
+    "type": "struct",
+    "type_mapping": [
+      [
+        "proposal",
+        "Vec<u8>"
+      ],
+      [
+        "round_no",
+        "u64"
+      ]
+    ]
+  },
+  "Membership": {
+    "type": "struct",
+    "type_mapping": [
+      [
+        "members",
+        "BTreeSet<Did>"
+      ],
+      [
+        "vote_requirement",
+        "u64"
+      ]
+    ]
+  },
+  "PMAuth": "BTreeMap<Did, DidSignature>",
   "StateChange": {
     "type": "enum",
     "type_mapping": [
@@ -259,6 +284,10 @@
       [
         "Blob",
         "Blob"
+      ],
+      [
+        "MasterVote",
+        "Payload"
       ]
     ]
   },
